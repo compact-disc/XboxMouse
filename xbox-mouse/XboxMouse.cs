@@ -58,7 +58,25 @@ namespace xbox_mouse
             }
             else
             {
-                Console.WriteLine("No Controller Connected.");
+                Console.WriteLine("No Controller Connected. Waiting to connect or press ESCAPE to close.");
+
+                while (true)
+                {
+                    //If the escape key is pressed then break the while loop to close the program
+                    if (EscapeKeyPressed(ConsoleKey.Escape))
+                    {
+                        break;
+                    }
+
+                    if (controller.IsConnected) 
+                    {
+                        Console.WriteLine("Controller Connected.");
+                        break;
+                    }
+
+                    Thread.Sleep(10);
+                }
+
             }
 
             //Only start the while loop to run the program if there is a controller connected

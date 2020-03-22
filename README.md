@@ -9,7 +9,5 @@ Controls:
 * A is Left Click
 * B is Right Click
 * Y is Middle Click
-* (1) Left Thumbstick is Mouse Movement
-* (10) Right Thumbstick is Scrolling (Up/Down, Left/Right)
-
-![Xbox One Layout](xbox-one-layout.png)
+* Left Thumbstick is Mouse Movement
+* Right Thumbstick is Scrolling (Up/Down, Left/Right)

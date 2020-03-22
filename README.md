@@ -9,5 +9,6 @@ Controls:
 * A is Left Click
 * B is Right Click
 * Y is Middle Click
+* X is Browser Back
 * Left Thumbstick is Mouse Movement
 * Right Thumbstick is Scrolling (Up/Down, Left/Right)

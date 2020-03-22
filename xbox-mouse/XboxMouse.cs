@@ -10,6 +10,10 @@ namespace xbox_mouse
         [System.Runtime.InteropServices.DllImport("user32.dll")]
         private static extern void mouse_event(int dwFlags, int dx, int dy, int dwData, int dwExtraInfo);
 
+        //Keyboard event function import
+        [System.Runtime.InteropServices.DllImport("user32.dll", SetLastError = true)]
+        private static extern void keybd_event(byte bVk, byte bScan, int dwFlags, int dwExtraInfo);
+
         //Mouse left click values
         private const int MOUSEEVENTF_LEFTDOWN = 0x0002;
         private const int MOUSEEVENTF_LEFTUP = 0x0004;
@@ -30,6 +34,15 @@ namespace xbox_mouse
 
         //Mouse tilt wheel movement
         private const int MOUSEEVENTF_HWHEEL = 0x01000;
+
+        //Browser back key
+        private const byte VK_BROWSER_BACK = 0xA6;
+
+        //Keyboard press key action
+        private const int KEYEVENTF_EXTENDEDKEY = 0x0001;
+
+        //Keyboard release key action
+        private const int KEYEVENTF_KEYUP = 0x0002;
 
         static void Main(string[] args)
         {
@@ -109,6 +122,11 @@ namespace xbox_mouse
                     //When the b button is pressed then right click
                     case GamepadButtonFlags.B:
                         RightClick();
+                        break;
+
+                    //When the x button is pressed then alt+leftarrow
+                    case GamepadButtonFlags.X:
+                        BrowserBack();
                         break;
 
                 }
@@ -211,6 +229,14 @@ namespace xbox_mouse
         private static double Acceleration(double a0, double a1, double b0, double b1, double a)
         {
             return b0 + (b1 - b0) * ((a - a0) / (a1 - a0));
+        }
+
+        //Run the keyboard shortcut for going back within a web browser
+        private static void BrowserBack()
+        {
+            keybd_event(VK_BROWSER_BACK, 0, KEYEVENTF_EXTENDEDKEY, 0);
+            Thread.Sleep(150);
+            keybd_event(VK_BROWSER_BACK, 0, KEYEVENTF_KEYUP, 0);
         }
 
     }

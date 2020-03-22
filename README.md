@@ -7,14 +7,15 @@ Packages:
 * SharpDX 4.2.0
 * SharpDX.XInput 4.2.0
 <br>
-<br>
+
 Controls:
 <br>
-* A - Left Click
-* B - Right Click
-* Y - Middle Click
-* Left Thumbstick - Mouse Movement
-* Right Thumbstick - Scrolling (Up/Down, Left/Right)
+* A is Left Click
+* B is Right Click
+* Y is Middle Click
+* Left Thumbstick is Mouse Movement
+* Right Thumbstick is Scrolling (Up/Down, Left/Right)
 <br>
 <br>
+
 ![Xbox One Layout](xbox-one-layout.png)

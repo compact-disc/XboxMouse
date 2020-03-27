@@ -131,9 +131,27 @@ namespace xbox_mouse
 
                 }
 
-                //Get the values for the left thumb stick x and y
-                mXA = state.Gamepad.LeftThumbX;
-                mYA = state.Gamepad.LeftThumbY;
+                //Get the value for the left thumb stick but with a margin of error of 5000
+                //Else do nothing at zero
+                if (state.Gamepad.LeftThumbX >= 5000 || state.Gamepad.LeftThumbX <= -5000)
+                {
+                    mXA = state.Gamepad.LeftThumbX;
+                } 
+                else
+                {
+                    mXA = 0;
+                }
+                
+                //Get the value for the left thumb stick but with a margin of error of 5000
+                //Else do nothing at zero
+                if (state.Gamepad.LeftThumbY >= 5000 || state.Gamepad.LeftThumbY <= -5000)
+                {
+                    mYA = state.Gamepad.LeftThumbY;
+                }
+                else
+                {
+                    mYA = 0;
+                }
 
                 //Get the acceleration for the x and y values for mouse movement
                 mXMovement = Acceleration(mXA0, mXA1, mXB0, mXB1, mXA);

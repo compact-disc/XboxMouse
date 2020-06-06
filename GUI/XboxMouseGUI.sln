@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30104.148
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XboxMouseGUI", "XboxMouseGUI.csproj", "{9952A3AB-3089-4FD4-8A71-73D00088EA79}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{9952A3AB-3089-4FD4-8A71-73D00088EA79}.Debug|Any CPU.ActiveCfg = Release|Any CPU
+		{9952A3AB-3089-4FD4-8A71-73D00088EA79}.Debug|Any CPU.Build.0 = Release|Any CPU
+		{9952A3AB-3089-4FD4-8A71-73D00088EA79}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9952A3AB-3089-4FD4-8A71-73D00088EA79}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {7AF20721-BD58-418F-9839-D5C1BC68D396}
+	EndGlobalSection
+EndGlobal

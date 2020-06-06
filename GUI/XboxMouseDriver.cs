@@ -2,9 +2,9 @@
 using System.Threading;
 using SharpDX.XInput;
 
-namespace xbox_mouse
+namespace XboxMouse
 {
-    class XboxMouse
+    internal class XboxMouseDriver
     {
         //Mouse event method to be called with parameters for mouse functions
         [System.Runtime.InteropServices.DllImport("user32.dll")]
@@ -44,7 +44,7 @@ namespace xbox_mouse
         //Keyboard release key action
         private const int KEYEVENTF_KEYUP = 0x0002;
 
-        static void Main(string[] args)
+        public XboxMouseDriver()
         {
 
             //Variables for mouse movement and acceleration
@@ -65,7 +65,7 @@ namespace xbox_mouse
 
             //Check if the controller is connected and show message
             //Else show a message saying not connected
-            if(controller.IsConnected)
+            if (controller.IsConnected)
             {
                 Console.WriteLine("Controller Connected.");
             }
@@ -81,7 +81,7 @@ namespace xbox_mouse
                         break;
                     }
 
-                    if (controller.IsConnected) 
+                    if (controller.IsConnected)
                     {
                         Console.WriteLine("Controller Connected.");
                         break;
@@ -99,16 +99,10 @@ namespace xbox_mouse
                 //Get the state of the controller
                 var state = controller.GetState();
 
-                //If the escape key is pressed then break the while loop to close the program
-                if (EscapeKeyPressed(ConsoleKey.Escape))
-                {
-                    break;
-                }
-
                 //Swich over the buttons to see which one is pressed
                 switch (state.Gamepad.Buttons)
                 {
-                    
+
                     //When the a button is pressed then left click
                     case GamepadButtonFlags.A:
                         LeftClick();
@@ -136,12 +130,12 @@ namespace xbox_mouse
                 if (state.Gamepad.LeftThumbX >= 5000 || state.Gamepad.LeftThumbX <= -5000)
                 {
                     mXA = state.Gamepad.LeftThumbX;
-                } 
+                }
                 else
                 {
                     mXA = 0;
                 }
-                
+
                 //Get the value for the left thumb stick but with a margin of error of 5000
                 //Else do nothing at zero
                 if (state.Gamepad.LeftThumbY >= 5000 || state.Gamepad.LeftThumbY <= -5000)
@@ -162,7 +156,7 @@ namespace xbox_mouse
 
                 //Get the values for the X stick but only if it is above 5000 for margin of error in the stick
                 //Else set it to zero so it doesnt move by itself
-                if(state.Gamepad.RightThumbX >= 5000 || state.Gamepad.RightThumbX <= -5000)
+                if (state.Gamepad.RightThumbX >= 5000 || state.Gamepad.RightThumbX <= -5000)
                 {
                     sXA = state.Gamepad.RightThumbX;
                 }
@@ -237,7 +231,7 @@ namespace xbox_mouse
         }
 
         //Move the mouse based on the change in x and y values
-        private static void MoveMouse(int dx, int dy) 
+        private static void MoveMouse(int dx, int dy)
         {
             mouse_event(MOUSEEVENTF_MOVE, dx, dy, 0, 0);
         }

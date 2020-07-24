@@ -4,7 +4,7 @@ using SharpDX.XInput;
 
 namespace XboxMouse
 {
-    internal class XboxMouseDriver
+    class XboxMouseDriver
     {
         //Mouse event method to be called with parameters for mouse functions
         [System.Runtime.InteropServices.DllImport("user32.dll")]
@@ -44,9 +44,10 @@ namespace XboxMouse
         //Keyboard release key action
         private const int KEYEVENTF_KEYUP = 0x0002;
 
+        public Boolean Connected = false;
+
         public XboxMouseDriver()
         {
-
             //Variables for mouse movement and acceleration
             double mXA0 = -32678, mXA1 = 32767, mXB0 = -15, mXB1 = 15, mXA;
             double mYA0 = -32678, mYA1 = 32767, mYB0 = 15, mYB1 = -15, mYA;
@@ -57,44 +58,25 @@ namespace XboxMouse
             double sYA0 = -32678, sYA1 = 32767, sYB0 = -25, sYB1 = 25, sYA;
             double sXMovement, sYMovement;
 
-            //Opening message with instructions how to exit
-            Console.WriteLine("Xbox Mouse Started. Press the ESCAPE key to exit.");
-
             //Create the controller object to be used, there is only a setup for one controller because there is only one mouse on a computer
             Controller controller = new Controller(UserIndex.One);
 
-            //Check if the controller is connected and show message
-            //Else show a message saying not connected
-            if (controller.IsConnected)
+            //While there is no controller connected wait in loop for one to be connected
+            while (!controller.IsConnected)
             {
-                Console.WriteLine("Controller Connected.");
-            }
-            else
-            {
-                Console.WriteLine("No Controller Connected. Waiting to connect or press ESCAPE to close.");
-
-                while (true)
+                Connected = false;
+                //Once a controller is connected, break this loop and go to the actual driver code
+                if (controller.IsConnected)
                 {
-                    //If the escape key is pressed then break the while loop to close the program
-                    if (EscapeKeyPressed(ConsoleKey.Escape))
-                    {
-                        break;
-                    }
-
-                    if (controller.IsConnected)
-                    {
-                        Console.WriteLine("Controller Connected.");
-                        break;
-                    }
-
-                    Thread.Sleep(10);
+                    Connected = true;
+                    break;
                 }
-
             }
 
             //Only start the while loop to run the program if there is a controller connected
             while (controller.IsConnected)
             {
+                Connected = true;
 
                 //Get the state of the controller
                 var state = controller.GetState();
@@ -187,9 +169,6 @@ namespace XboxMouse
                 Thread.Sleep(10);
 
             }
-
-            //When the program is ended, say it
-            Console.WriteLine("Xbox Mouse Stopped.");
 
         }
 
